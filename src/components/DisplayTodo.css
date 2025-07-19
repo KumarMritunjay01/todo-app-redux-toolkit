@@ -25,13 +25,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .todo-actions {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* space between icon and checkbox */
 }
 
 .no-todos {
@@ -43,4 +43,7 @@
     text-decoration: line-through;
     color: gray;
     opacity: 0.7;
+}
+.checkbox{
+    cursor: pointer;
 }

@@ -35,8 +35,9 @@ function DisplayTodo() {
                   onClick={() => deleteTodoHandler(todo.id)}
                 />
                 <input
+                  className="checkbox"
                   type="checkbox"
-                  checked={!!todo.completed} // forces undefined → false
+                  checked={!!todo.completed}
                   onChange={() => handleCheckboxChange(todo.id)}
                 />
               </span>

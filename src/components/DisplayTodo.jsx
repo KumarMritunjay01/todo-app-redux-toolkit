@@ -7,7 +7,7 @@ import { deleteTodo, toggleCompleted } from "../features/todo/todoSlice";
 
 function DisplayTodo() {
   const todos = useSelector((state) => state.todo.value);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [filter, setFilter] = useState("all");
 
   const dispatch = useDispatch();
 
@@ -15,18 +15,42 @@ function DisplayTodo() {
     dispatch(deleteTodo(id));
   };
 
+  const filterTasks = todos.filter((task) => {
+    if (filter === "completed") return task.completed === true;
+    if (filter === "pending") return task.completed === false;
+    return true;
+  });
+
   const handleCheckboxChange = (id) => {
     dispatch(toggleCompleted(id));
   };
-
   return (
     <div className="todo-list-container">
-      <h3>Available Todos</h3>
-      {todos.length === 0 ? (
+      <div className="w-full h-14  flex justify-between items-center pl-2 pr-2 mb-5 text-xl font-semibold ">
+        <button
+          className="border-1 border-white w-1/5 h-2/3 cursor-pointer"
+          onClick={() => setFilter("all")}
+        >
+          All Todos
+        </button>
+        <button
+          className="border-1 border-white w-1/5 h-2/3 cursor-pointer"
+          onClick={() => setFilter("completed")}
+        >
+          Completed
+        </button>
+        <button
+          className="border-1 border-white w-1/5 h-2/3 cursor-pointer"
+          onClick={() => setFilter("pending")}
+        >
+          Pending
+        </button>
+      </div>
+      {filterTasks.length === 0 ? (
         <p className="no-todos">No todos available.</p>
       ) : (
         <ul>
-          {todos.map((todo, index) => (
+          {filterTasks.map((todo, index) => (
             <li key={index} className={todo.completed ? "completed" : ""}>
               {todo.text}
               <span className="todo-actions">

@@ -9,7 +9,12 @@ function AddTodo() {
 
   const handleAddTodo = () => {
     if (input.trim() === "") return;
-    dispatch(addtodo(input));
+    const newTodo = {
+      id: Date.now(),
+      text: input,
+      completed: false,
+    };
+    dispatch(addtodo(newTodo));
     setInput("");
   };
   return (

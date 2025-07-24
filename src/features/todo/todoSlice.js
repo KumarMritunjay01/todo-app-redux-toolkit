@@ -29,12 +29,7 @@ const todoSlice = createSlice({
   // Update your reducers like this:
   reducers: {
     addtodo: (state, action) => {
-      const newTodo = {
-        id: Date.now(),
-        text: action.payload,
-        completed: false,
-      };
-      state.value.push(newTodo);
+      state.value.push(action.payload);
       saveTodoLocalStorage(state.value);
     },
     deleteTodo: (state, action) => {
